@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayout_row_song_Media"
+        android:background="@drawable/corner_radius"
+        android:layout_margin="10dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/ImageView_row_song_Media"
+            android:background="@mipmap/ic_launcher"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_NameSong_row_song_Media"
+        android:layout_toRightOf="@id/LinearLayout_row_song_Media"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:text="Bong mot ngay anh nho den em em em em"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_NameArtis_CC_row_song_Media"
+        android:text="Ca sĩ: "
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:layout_below="@id/TextView_NameSong_row_song_Media"
+        android:layout_toRightOf="@id/LinearLayout_row_song_Media"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_NameArtis_row_song_Media"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@id/TextView_NameArtis_CC_row_song_Media"
+        android:layout_below="@id/TextView_NameSong_row_song_Media"
+        android:text="Truong Hung Khanh"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_NameAuthor_CC_row_song_Media"
+        android:text="Sáng tác: "
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:layout_below="@id/TextView_NameArtis_row_song_Media"
+        android:layout_toRightOf="@id/LinearLayout_row_song_Media"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:id="@+id/TextView_NameAuthor_row_song_Media"
+        android:layout_toRightOf="@id/TextView_NameAuthor_CC_row_song_Media"
+        android:layout_below="@id/TextView_NameArtis_row_song_Media"
+        android:text="Truong Khanh Hung"/>
+
+</RelativeLayout>
