@@ -3,10 +3,10 @@
 My first project on android using java language 
 
 
-**I will update English README later, for now only vietnamese can read. Sory**
+**_I will update English README later, for now only vietnamese can read. Sorry_**
 
 
-Mục tiêu của ứng dụng là nghe nhạc offline
+**_Mục tiêu của ứng dụng là nghe nhạc offline_**
 
 ## Tính năng hiện có: 
 >Lấy nhạc trong thư mục Zing MP3 làm thư mục mặc định.
