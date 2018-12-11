@@ -12,6 +12,7 @@ import android.media.MediaMetadataRetriever;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,8 +109,15 @@ public class rowSongFragmentAdapater extends RecyclerView.Adapter<rowSongFragmen
                 public void onClick(View v) {
                     // Call Intent and pop to new Activity MediaPlayerActivity
                     int Position = getPosition();
-                    musicService.setSong(Position);
-                    musicService.PlaySong();
+                    if(musicService.getmRandom()) {
+                        musicService.setmRandom(false);
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                        musicService.setmRandom(true);
+                    } else {
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                    }
 
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MediaPlayerActivity.class);

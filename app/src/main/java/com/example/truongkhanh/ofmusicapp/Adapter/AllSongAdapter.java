@@ -105,8 +105,15 @@ public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHold
                 public void onClick(View v) {
                     // Call Intent and pop to new Activity MediaPlayerActivity
                     int Position = getPosition();
-                    musicService.setSong(Position);
-                    musicService.PlaySong();
+                    if(musicService.getmRandom()) {
+                        musicService.setmRandom(false);
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                        musicService.setmRandom(true);
+                    } else {
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                    }
 
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MediaPlayerActivity.class);

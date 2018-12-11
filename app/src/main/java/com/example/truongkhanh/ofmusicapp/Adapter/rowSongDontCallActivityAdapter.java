@@ -83,10 +83,15 @@ public class rowSongDontCallActivityAdapter extends RecyclerView.Adapter<rowSong
                 @Override
                 public void onClick(View v) {
                     int Position = getPosition();
-                    musicService.setmRandom(false);
-                    musicService.setSong(Position);
-                    musicService.PlaySong();
-                    musicService.setmRandom(true);
+                    if(musicService.getmRandom()) {
+                        musicService.setmRandom(false);
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                        musicService.setmRandom(true);
+                    } else {
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                    }
                 }
             });
         }

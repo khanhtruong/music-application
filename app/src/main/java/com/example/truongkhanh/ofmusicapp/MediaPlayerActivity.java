@@ -102,22 +102,14 @@ public class MediaPlayerActivity extends AppCompatActivity {
     }
 
     private void createSeekBarListener(){
-
+        // SeekBar Listener when user change seekbar progress
+        // Set time song to play in that seekbar progress
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if(musicService.getmMediaPlayer() != null && fromUser) {
                     musicService.setProgressMediaPlayer(seekBar.getProgress());
                 }
-
-//                if(seekBar.getProgress() >= seekBar.getMax() - 200 && mFlag){
-//                    mFlag=false;
-//                    musicService.playNext();
-//                    seekBar.setMax(musicService.timeSong());
-//                    seekBar.setProgress(musicService.currentPosition());
-//                    mFlag=true;
-//                }
-
                 UpdateUI();
             }
 
@@ -135,6 +127,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy(){
+        // onDestroy we unbind Music Service and remove Runnable mUpdateSeekbar
         super.onDestroy();
         unbindService(MusicConnection);
         mSeekbarUpdateHandler.removeCallbacks(mUpdateSeekbar);
@@ -158,7 +151,6 @@ public class MediaPlayerActivity extends AppCompatActivity {
 
     // Mapping component bên UI
     private void Mapping() {
-//        imageViewSong = (ImageView) findViewById(R.id.ImageView_Media_Player);
         btnStart = (Button) findViewById(R.id.Button_Play);
         btnBack = (Button) findViewById(R.id.Button_Back);
         btnForward = (Button) findViewById(R.id.Button_Forward);
