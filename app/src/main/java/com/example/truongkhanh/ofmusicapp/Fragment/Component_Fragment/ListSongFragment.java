@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,10 +71,31 @@ public class ListSongFragment extends Fragment {
                 mmr.setDataSource(file.getAbsolutePath());
 
                 Song song = new Song();
-                song.setNameSong(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
-                song.setNameAlbum(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
-                song.setNameArtis(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
-                song.setNameAuthor(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_AUTHOR));
+
+                String nameSong = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+                if(TextUtils.isEmpty(nameSong)){
+                    nameSong = "Unknow Song";
+                }
+                song.setNameSong(nameSong);
+
+                String nameAlbum = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+                if(TextUtils.isEmpty(nameAlbum)){
+                    nameAlbum = "Unknow Album";
+                }
+                song.setNameAlbum(nameAlbum);
+
+                String nameArtis = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+                if(TextUtils.isEmpty(nameArtis)){
+                    nameArtis = "Unknow Artis";
+                }
+                song.setNameArtis(nameArtis);
+
+                String nameAuthor = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_AUTHOR);
+                if(TextUtils.isEmpty(nameAuthor)){
+                    nameArtis = "Unknow Author";
+                }
+                song.setNameAuthor(nameAuthor);
+
                 song.setPathSong(file.getPath());
 
                 // Add song to arrayListSong with data in it
