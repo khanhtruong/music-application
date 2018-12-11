@@ -110,13 +110,15 @@ public class MediaPlayerActivity extends AppCompatActivity {
                     musicService.setProgressMediaPlayer(seekBar.getProgress());
                 }
 
-                if(seekBar.getProgress() >= seekBar.getMax() - 200 && mFlag){
-                    mFlag=false;
-                    musicService.playNext();
-                    seekBar.setMax(musicService.timeSong());
-                    seekBar.setProgress(musicService.currentPosition());
-                    mFlag=true;
-                } UpdateUI();
+//                if(seekBar.getProgress() >= seekBar.getMax() - 200 && mFlag){
+//                    mFlag=false;
+//                    musicService.playNext();
+//                    seekBar.setMax(musicService.timeSong());
+//                    seekBar.setProgress(musicService.currentPosition());
+//                    mFlag=true;
+//                }
+
+                UpdateUI();
             }
 
             @Override

@@ -20,7 +20,7 @@ import static com.example.truongkhanh.ofmusicapp.MediaPlayerActivity.btnStart;
 import static com.example.truongkhanh.ofmusicapp.MediaPlayerActivity.mSeekbarUpdateHandler;
 import static com.example.truongkhanh.ofmusicapp.MediaPlayerActivity.mUpdateSeekbar;
 
-public class MusicService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener{
+public class MusicService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener{
 
     private boolean mRandom = false;
     private boolean mRepeat = true;
@@ -100,6 +100,12 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
         return false;
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+//        Log.d("KhanhAAA", String.valueOf(songPosition));
+        playNext();
     }
 
     public void pauseSong(){
