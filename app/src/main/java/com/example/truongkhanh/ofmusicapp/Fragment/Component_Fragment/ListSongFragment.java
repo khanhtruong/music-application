@@ -37,7 +37,6 @@ public class ListSongFragment extends Fragment {
     RecyclerView recyclerViewSong;
     rowSongAdapater rowSongAdapater;
     ArrayList<Song> arrayListSong = new ArrayList<>();
-    ArrayList<Song> arrayList5Song = new ArrayList<>();
 
     public ListSongFragment() {
         // Required empty public constructor
@@ -101,12 +100,6 @@ public class ListSongFragment extends Fragment {
                 // Add song to arrayListSong with data in it
                 // We need more song in AllOfflineSong Activity
                 arrayListSong.add(song);
-
-                // Only take 5 song on Folder MP3
-                if(count!=5){
-                    arrayList5Song.add(song);
-                    count++;
-                }
             }
 
         } else {
@@ -114,7 +107,7 @@ public class ListSongFragment extends Fragment {
         }
 
         // Pass 5 song to Person Fragment
-        rowSongAdapater = new rowSongAdapater(arrayList5Song);
+        rowSongAdapater = new rowSongAdapater(arrayListSong);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewSong.setLayoutManager(linearLayoutManager);

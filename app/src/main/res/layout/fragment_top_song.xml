@@ -2,8 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".Fragment.Component_Fragment.ListSongFragment">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragment.Component_Fragment.TopSongFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,8 +13,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/TextView_more_song"
-            android:text="@string/list_song"
+            android:id="@+id/TextView_more_top_song"
+            android:text="@string/top_song"
             android:textColor="@color/white"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="2dp"
@@ -21,16 +23,17 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/RecyclerView_list_song"
+            android:id="@+id/RecyclerView_top_song"
             android:background="@color/black"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Button_Show_More_Song"
+            android:id="@+id/Button_more_top_Song"
             android:text="@string/show_more"
             android:layout_gravity="center_horizontal"
             android:background="@null"
             android:textSize="13sp"
-            android:textColor="@color/MainColor"/>
+            android:textColor="@color/MainColor"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 </FrameLayout>

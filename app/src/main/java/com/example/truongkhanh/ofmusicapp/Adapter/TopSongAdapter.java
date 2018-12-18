@@ -4,11 +4,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.MediaMetadataRetriever;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -18,72 +13,56 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.truongkhanh.ofmusicapp.MediaPlayerActivity;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
 import com.example.truongkhanh.ofmusicapp.Service.MusicService;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
-import static com.example.truongkhanh.ofmusicapp.MainActivity.musicBound;
 
-public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHolder> {
+public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHolder> {
 
-    ArrayList<Song> arrayListSong;
-    private Context context;
+    ArrayList<Song> songArrayList;
+    Context context;
+
     private Intent musicIntent;
     public MusicService musicService;
     private boolean musicBound = false;
 
-    public AllSongAdapter(ArrayList<Song> songs){
-        this.arrayListSong = songs;
+    public TopSongAdapter(Context context, ArrayList<Song> songs){
+        this.songArrayList = songs;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public AllSongAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        context = viewGroup.getContext();
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.row_song,viewGroup,false);
+    public TopSongAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.row_song, viewGroup, false);
 
-        if(musicIntent==null){
+        if(!musicBound){
             musicIntent = new Intent(context, MusicService.class);
             context.bindService(musicIntent,MusicConnection,context.BIND_AUTO_CREATE);
             context.startService(musicIntent);
         }
 
-        // Return ViewHolder from view create above
-        return new AllSongAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllSongAdapter.ViewHolder viewHolder, int i) {
-        Song song = arrayListSong.get(i);
+    public void onBindViewHolder(@NonNull TopSongAdapter.ViewHolder viewHolder, int i) {
+        Song song = songArrayList.get(i);
         viewHolder.nameSong.setText(song.getNameSong());
-        viewHolder.nameArtis.setText(song.getNameArtis());
+        viewHolder.nameArtis.setText("");
         viewHolder.nameAuthor.setText(song.getNameAuthor());
-
-        // Get Image from File MP3
-        File file = new File(song.getPathSong());
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(file.getAbsolutePath());
-        byte[] imageByte = mmr.getEmbeddedPicture();
-        Bitmap imageSong;
-        if(imageByte!=null) {
-            imageSong = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
-            viewHolder.imageViewSong.setImageBitmap(imageSong);
-        } else {
-            // If imagebyte is NULL we get default icon for imageSong
-            Drawable drawable = context.getResources().getDrawable(R.drawable.default_icon_wedidit);
-            imageSong = ((BitmapDrawable)drawable).getBitmap();
-            viewHolder.imageViewSong.setImageBitmap(imageSong);
-        }
+        Glide.with(context).load(song.getLinkImageSong()).into(viewHolder.imageViewSong);
     }
 
     @Override
     public int getItemCount() {
-        return arrayListSong.size();
+        return 4;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -91,13 +70,13 @@ public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHold
         ImageView imageViewSong;
         TextView nameSong, nameArtis, nameAuthor;
 
-        public ViewHolder(@NonNull final View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             imageViewSong = itemView.findViewById(R.id.ImageView_row_song);
             nameSong = itemView.findViewById(R.id.TextView_NameSong_row_song);
             nameArtis = itemView.findViewById(R.id.TextView_NameArtis_row_song);
             nameAuthor = itemView.findViewById(R.id.TextView_NameAuthor_row_song);
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,7 +95,7 @@ public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHold
 
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MediaPlayerActivity.class);
-                    intent.putExtra("PlaySong", arrayListSong);
+                    intent.putExtra("PlaySong", songArrayList);
                     intent.putExtra("SongPosition", Position);
                     v.getContext().startActivity(intent);
                 }
@@ -131,7 +110,7 @@ public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHold
             // Get service
             musicService = binder.getService();
             // Send Data
-            musicService.getData(arrayListSong);
+            musicService.getData(songArrayList);
             musicBound = true;
         }
 

@@ -17,9 +17,9 @@ public class Song implements Parcelable {
     @SerializedName("NameSong")
     @Expose
     private String nameSong;
-//    @SerializedName("ImageSong")
-//    @Expose
-//    private Bitmap imageSong;
+    @SerializedName("LinkImageSong")
+    @Expose
+    private String linkImageSong;
     @SerializedName("NameArtis")
     @Expose
     private String nameArtis;
@@ -38,7 +38,7 @@ public class Song implements Parcelable {
 
     protected Song(Parcel in) {
         nameSong = in.readString();
-//        imageSong = in.readParcelable(null);
+        linkImageSong = in.readString();
         nameArtis = in.readString();
         nameAlbum = in.readString();
         nameAuthor = in.readString();
@@ -66,13 +66,13 @@ public class Song implements Parcelable {
         this.nameSong = nameSong;
     }
 
-//    public Bitmap getImageSong() {
-//        return imageSong;
-//    }
-//
-//    public void setImageSong(Bitmap imageSong) {
-//        this.imageSong = imageSong;
-//    }
+    public String getLinkImageSong() {
+        return linkImageSong;
+    }
+
+    public void setLinkImageSong(String linkImageSong) {
+        this.linkImageSong = linkImageSong;
+    }
 
     public String getNameArtis() {
         return nameArtis;
@@ -110,7 +110,7 @@ public class Song implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nameSong);
-//        dest.writeParcelable(imageSong, flags);
+        dest.writeString(linkImageSong);
         dest.writeString(nameArtis);
         dest.writeString(nameAlbum);
         dest.writeString(nameAuthor);
