@@ -45,6 +45,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setOnErrorListener(this);
         mMediaPlayer.setOnPreparedListener(this);
+        mMediaPlayer.setOnCompletionListener(this);
     }
 
     public void getData(ArrayList<Song> songs){
@@ -53,6 +54,17 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public int getSongPosition(){
         return songPosition;
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        if(getmRandom()){
+            setmRandom(false);
+            playNext();
+            setmRandom(true);
+        } else {
+            playNext();
+        }
     }
 
     public class MusicBinder extends Binder{
@@ -102,11 +114,6 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         return false;
     }
 
-    @Override
-    public void onCompletion(MediaPlayer mp) {
-//        Log.d("KhanhAAA", String.valueOf(songPosition));
-        playNext();
-    }
 
     public void pauseSong(){
         mMediaPlayer.pause();

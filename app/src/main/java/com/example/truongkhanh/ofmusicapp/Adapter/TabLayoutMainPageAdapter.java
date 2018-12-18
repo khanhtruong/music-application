@@ -9,11 +9,11 @@ import com.example.truongkhanh.ofmusicapp.Fragment.TabLayout_Fragment.HomeFragme
 import com.example.truongkhanh.ofmusicapp.Fragment.TabLayout_Fragment.PersonFragment;
 import com.example.truongkhanh.ofmusicapp.R;
 
-public class MainFragmentAdapter extends FragmentPagerAdapter {
+public class TabLayoutMainPageAdapter extends FragmentPagerAdapter {
 
     Context mContext;
 
-    public MainFragmentAdapter(Context context, FragmentManager fm) {
+    public TabLayoutMainPageAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }

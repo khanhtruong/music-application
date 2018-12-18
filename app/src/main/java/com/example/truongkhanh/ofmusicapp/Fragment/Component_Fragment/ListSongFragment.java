@@ -2,13 +2,14 @@ package com.example.truongkhanh.ofmusicapp.Fragment.Component_Fragment;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.truongkhanh.ofmusicapp.Adapter.rowSongFragmentAdapater;
+import com.example.truongkhanh.ofmusicapp.Adapter.rowSongAdapater;
 import com.example.truongkhanh.ofmusicapp.AllOfflineSongActivity;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
@@ -34,7 +35,7 @@ public class ListSongFragment extends Fragment {
     TextView textView_More_Song;
     Button btn_Show_More_Song;
     RecyclerView recyclerViewSong;
-    rowSongFragmentAdapater rowSongFragmentAdapater;
+    rowSongAdapater rowSongAdapater;
     ArrayList<Song> arrayListSong = new ArrayList<>();
     ArrayList<Song> arrayList5Song = new ArrayList<>();
 
@@ -70,10 +71,31 @@ public class ListSongFragment extends Fragment {
                 mmr.setDataSource(file.getAbsolutePath());
 
                 Song song = new Song();
-                song.setNameSong(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
-                song.setNameAlbum(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
-                song.setNameArtis(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
-                song.setNameAuthor(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_AUTHOR));
+
+                String nameSong = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+                if(TextUtils.isEmpty(nameSong)){
+                    nameSong = "Unknow Song";
+                }
+                song.setNameSong(nameSong);
+
+                String nameAlbum = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+                if(TextUtils.isEmpty(nameAlbum)){
+                    nameAlbum = "Unknow Album";
+                }
+                song.setNameAlbum(nameAlbum);
+
+                String nameArtis = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+                if(TextUtils.isEmpty(nameArtis)){
+                    nameArtis = "Unknow Artis";
+                }
+                song.setNameArtis(nameArtis);
+
+                String nameAuthor = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_AUTHOR);
+                if(TextUtils.isEmpty(nameAuthor)){
+                    nameArtis = "Unknow Author";
+                }
+                song.setNameAuthor(nameAuthor);
+
                 song.setPathSong(file.getPath());
 
                 // Add song to arrayListSong with data in it
@@ -92,11 +114,11 @@ public class ListSongFragment extends Fragment {
         }
 
         // Pass 5 song to Person Fragment
-        rowSongFragmentAdapater = new rowSongFragmentAdapater(arrayList5Song);
+        rowSongAdapater = new rowSongAdapater(arrayList5Song);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewSong.setLayoutManager(linearLayoutManager);
-        recyclerViewSong.setAdapter(rowSongFragmentAdapater);
+        recyclerViewSong.setAdapter(rowSongAdapater);
     }
 
     private List<File> getMp3File(File mp3Folder) {

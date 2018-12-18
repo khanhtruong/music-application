@@ -5,10 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.TabLayout_Fragment.HomeFragment">
     <ScrollView
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:fillViewport="true"
         android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.example.truongkhanh.ofmusicapp.Fragment.Component_Fragment.ListBannerFragment"
+                android:id="@+id/fragment_Banner"/>
 
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>
