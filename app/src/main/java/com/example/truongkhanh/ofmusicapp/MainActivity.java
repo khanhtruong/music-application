@@ -1,22 +1,13 @@
 package com.example.truongkhanh.ofmusicapp;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.example.truongkhanh.ofmusicapp.Adapter.MainFragmentAdapter;
+import com.example.truongkhanh.ofmusicapp.Adapter.TabLayoutMainPageAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void InitPagerAdaptor() {
         //Attach viewPager to Adapter
-        MainFragmentAdapter homeFragmentAdapter =
-                new MainFragmentAdapter(this, getSupportFragmentManager());
+        TabLayoutMainPageAdapter homeFragmentAdapter =
+                new TabLayoutMainPageAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(homeFragmentAdapter);
 
         //Attach tablayout to viewPager

@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class rowSongMediaFragmentAdapter extends FragmentPagerAdapter {
+public class multiFragmentViewPagerAdapter extends FragmentPagerAdapter {
 
     public final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
 
-    public rowSongMediaFragmentAdapter(FragmentManager fm) {
+    public multiFragmentViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.Toolbar;
 
 import com.example.truongkhanh.ofmusicapp.Adapter.AllSongAdapter;
-import com.example.truongkhanh.ofmusicapp.Adapter.rowSongFragmentAdapater;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class AllOfflineSongActivity extends AppCompatActivity {

@@ -12,7 +12,6 @@ import android.media.MediaMetadataRetriever;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import com.example.truongkhanh.ofmusicapp.Service.MusicService;
 import java.io.File;
 import java.util.ArrayList;
 
-public class rowSongDontCallActivityAdapter extends RecyclerView.Adapter<rowSongDontCallActivityAdapter.ViewHolder>{
+public class rowSongMediaPlayerAdapter extends RecyclerView.Adapter<rowSongMediaPlayerAdapter.ViewHolder>{
 
     ArrayList<Song> songArrayList;
     Context context;
@@ -34,13 +33,13 @@ public class rowSongDontCallActivityAdapter extends RecyclerView.Adapter<rowSong
     public MusicService musicService;
     private boolean musicBound = false;
 
-    public rowSongDontCallActivityAdapter(ArrayList<Song> songs){
+    public rowSongMediaPlayerAdapter(ArrayList<Song> songs){
         this.songArrayList = songs;
     }
 
     @NonNull
     @Override
-    public rowSongDontCallActivityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public rowSongMediaPlayerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         context = viewGroup.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.row_song_for_media, viewGroup, false);
@@ -53,7 +52,7 @@ public class rowSongDontCallActivityAdapter extends RecyclerView.Adapter<rowSong
     }
 
     @Override
-    public void onBindViewHolder(@NonNull rowSongDontCallActivityAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull rowSongMediaPlayerAdapter.ViewHolder viewHolder, int i) {
         Song song = songArrayList.get(i);
 
         getImageSong(viewHolder, i);
@@ -83,10 +82,15 @@ public class rowSongDontCallActivityAdapter extends RecyclerView.Adapter<rowSong
                 @Override
                 public void onClick(View v) {
                     int Position = getPosition();
-                    musicService.setmRandom(false);
-                    musicService.setSong(Position);
-                    musicService.PlaySong();
-                    musicService.setmRandom(true);
+                    if(musicService.getmRandom()) {
+                        musicService.setmRandom(false);
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                        musicService.setmRandom(true);
+                    } else {
+                        musicService.setSong(Position);
+                        musicService.PlaySong();
+                    }
                 }
             });
         }
