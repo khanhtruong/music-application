@@ -44,7 +44,7 @@ return namecasi;
 public void setNAMECASI(String nAMECASI) {
 this.namecasi = nAMECASI;
 }
-
+  
 public String getLINKIMG() {
 return linkimg;
 }

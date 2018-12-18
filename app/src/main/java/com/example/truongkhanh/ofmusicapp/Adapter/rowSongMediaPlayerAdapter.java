@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
@@ -117,7 +116,6 @@ public class rowSongMediaPlayerAdapter extends RecyclerView.Adapter<rowSongMedia
         } else {
             Glide.with(context).load(song.getLinkImageSong()).into(viewHolder.imageSong);
         }
-
     }
 
     public ServiceConnection MusicConnection = new ServiceConnection() {
