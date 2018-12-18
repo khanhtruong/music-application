@@ -12,13 +12,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-import com.example.truongkhanh.ofmusicapp.Adapter.rowSongMediaFragmentAdapter;
-import com.example.truongkhanh.ofmusicapp.Fragment.Component_Fragment.RowSongMediaFragment;
+import com.example.truongkhanh.ofmusicapp.Adapter.multiFragmentViewPagerAdapter;
+import com.example.truongkhanh.ofmusicapp.Fragment.Component_Fragment.ListSongInMediaPlayerFragment;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.Service.MusicService;
 
@@ -26,19 +25,19 @@ import java.util.ArrayList;
 
 public class MediaPlayerActivity extends AppCompatActivity {
 
-    ImageView imageViewSong;
+    //ImageView imageViewSong;
     public static Button btnStart, btnBack, btnForward, btnLike, btnMoreOption, btnRandom, btnRepeat;
     public static SeekBar seekBar;
     Toolbar toolbarMediaPlayer;
-    RowSongMediaFragment rowSongMediaFragment;
-    public static rowSongMediaFragmentAdapter rowSongMediaFragmentAdapter;
+    ListSongInMediaPlayerFragment listSongInMediaPlayerFragment;
+    public static multiFragmentViewPagerAdapter multiFragmentViewPagerAdapter;
     ViewPager viewPager;
     public static ArrayList<Song> songArrayList;
     int songPosition;
     public static final Handler mSeekbarUpdateHandler = new Handler();
     final Handler mWaitServiceReadyHandler = new Handler();
     public static Runnable mUpdateSeekbar;
-    static boolean mFlag = true;
+    //static boolean mFlag = true;
     Runnable mWaitServiceReady;
 
     private Intent musicIntent;
@@ -162,10 +161,10 @@ public class MediaPlayerActivity extends AppCompatActivity {
         toolbarMediaPlayer = (Toolbar) findViewById(R.id.Toolbar_Media_Player);
         viewPager = findViewById(R.id.ViewPager_Media_Player);
 
-        rowSongMediaFragmentAdapter = new rowSongMediaFragmentAdapter(getSupportFragmentManager());
-        rowSongMediaFragment = new RowSongMediaFragment();
-        rowSongMediaFragmentAdapter.AddFragment(rowSongMediaFragment);
-        viewPager.setAdapter(rowSongMediaFragmentAdapter);
+        multiFragmentViewPagerAdapter = new multiFragmentViewPagerAdapter(getSupportFragmentManager());
+        listSongInMediaPlayerFragment = new ListSongInMediaPlayerFragment();
+        multiFragmentViewPagerAdapter.AddFragment(listSongInMediaPlayerFragment);
+        viewPager.setAdapter(multiFragmentViewPagerAdapter);
     }
 
     // Lấy dữ liệu truyền vào activity, sử dụng intent

@@ -12,7 +12,6 @@ import android.media.MediaMetadataRetriever;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +26,7 @@ import com.example.truongkhanh.ofmusicapp.Service.MusicService;
 import java.io.File;
 import java.util.ArrayList;
 
-import static com.example.truongkhanh.ofmusicapp.MainActivity.musicBound;
-
-public class rowSongFragmentAdapater extends RecyclerView.Adapter<rowSongFragmentAdapater.ViewHolder> {
+public class rowSongAdapater extends RecyclerView.Adapter<rowSongAdapater.ViewHolder> {
 
     private ArrayList<Song> mSongArrayList;
 
@@ -39,13 +36,13 @@ public class rowSongFragmentAdapater extends RecyclerView.Adapter<rowSongFragmen
     public MusicService musicService;
     private boolean musicBound = false;
 
-    public rowSongFragmentAdapater(ArrayList<Song> songArrayList){
+    public rowSongAdapater(ArrayList<Song> songArrayList){
         this.mSongArrayList = songArrayList;
     }
 
     @NonNull
     @Override
-    public rowSongFragmentAdapater.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public rowSongAdapater.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         // get view from viewGroup
         context = viewGroup.getContext();
         View view = LayoutInflater.from(context)
@@ -62,7 +59,7 @@ public class rowSongFragmentAdapater extends RecyclerView.Adapter<rowSongFragmen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull rowSongFragmentAdapater.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull rowSongAdapater.ViewHolder viewHolder, int i) {
         // get component mapping on ViewHolder class below and Set Data to it
         Song song = mSongArrayList.get(i);
         viewHolder.nameSong.setText(song.getNameSong());
