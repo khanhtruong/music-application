@@ -7,6 +7,7 @@
     <string name="list_song"><i>DANH SÁCH CA KHÚC OFFLINE ></i></string>
     <string name="show_more"><i><u>Xem Thêm</u></i></string>
     <string name="list_all_song"><i>Danh sách tất cả bài hát offline</i></string>
+    <string name="top_song"><i>TOP CA KHÚC</i></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

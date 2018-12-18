@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
 import com.example.truongkhanh.ofmusicapp.Service.MusicService;
@@ -98,20 +99,25 @@ public class rowSongMediaPlayerAdapter extends RecyclerView.Adapter<rowSongMedia
 
     private void getImageSong(ViewHolder viewHolder, int songPosition) {
         Song song = songArrayList.get(songPosition);
-        File file = new File(song.getPathSong());
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(file.getAbsolutePath());
-        byte[] imageByte = mmr.getEmbeddedPicture();
-        Bitmap imageSong;
-        if(imageByte!=null) {
-            imageSong = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
-            viewHolder.imageSong.setImageBitmap(imageSong);
+        if(song.getLinkImageSong().equals("")){
+            File file = new File(song.getPathSong());
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            mmr.setDataSource(file.getAbsolutePath());
+            byte[] imageByte = mmr.getEmbeddedPicture();
+            Bitmap imageSong;
+            if(imageByte!=null) {
+                imageSong = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+                viewHolder.imageSong.setImageBitmap(imageSong);
+            } else {
+                // If imagebyte is NULL we get default icon for imageSong
+                Drawable drawable = context.getResources().getDrawable(R.drawable.default_icon_wedidit);
+                imageSong = ((BitmapDrawable)drawable).getBitmap();
+                viewHolder.imageSong.setImageBitmap(imageSong);
+            }
         } else {
-            // If imagebyte is NULL we get default icon for imageSong
-            Drawable drawable = context.getResources().getDrawable(R.drawable.default_icon_wedidit);
-            imageSong = ((BitmapDrawable)drawable).getBitmap();
-            viewHolder.imageSong.setImageBitmap(imageSong);
+            Glide.with(context).load(song.getLinkImageSong()).into(viewHolder.imageSong);
         }
+
     }
 
     public ServiceConnection MusicConnection = new ServiceConnection() {

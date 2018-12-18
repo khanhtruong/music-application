@@ -14,12 +14,12 @@ private String namebaihat;
 @SerializedName("NAME_CA_SI")
 @Expose
 private String namecasi;
-@SerializedName("ID_IMG")
+@SerializedName("LINK_IMG")
 @Expose
-private String idimg;
-@SerializedName("PATH_BAI_HAT")
+private String linkimg;
+@SerializedName("LINK_BAI_HAT")
 @Expose
-private String pathbaihat;
+private String linkbaihat;
 
 public String getIDBAIHAT() {
 return idbaihat;
@@ -45,20 +45,20 @@ public void setNAMECASI(String nAMECASI) {
 this.namecasi = nAMECASI;
 }
 
-public String getIDIMG() {
-return idimg;
+public String getLINKIMG() {
+return linkimg;
 }
 
-public void setIDIMG(String iDIMG) {
-this.idimg = iDIMG;
+public void setLINKIMG(String lINKIMG) {
+this.linkimg = lINKIMG;
 }
 
-public String getPATHBAIHAT() {
-return pathbaihat;
+public String getLINKBAIHAT() {
+return linkbaihat;
 }
 
-public void setPATHBAIHAT(String pATHBAIHAT) {
-this.pathbaihat = pATHBAIHAT;
+public void setLINKBAIHAT(String lINKBAIHAT) {
+this.linkbaihat = lINKBAIHAT;
 }
 
 }

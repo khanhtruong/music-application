@@ -29,7 +29,6 @@ import java.util.ArrayList;
 public class rowSongAdapater extends RecyclerView.Adapter<rowSongAdapater.ViewHolder> {
 
     private ArrayList<Song> mSongArrayList;
-
     private Context context;
 
     private Intent musicIntent;
@@ -48,7 +47,7 @@ public class rowSongAdapater extends RecyclerView.Adapter<rowSongAdapater.ViewHo
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.row_song,viewGroup,false);
 
-        if(musicIntent==null){
+        if(!musicBound){
             musicIntent = new Intent(context, MusicService.class);
             context.bindService(musicIntent,MusicConnection,context.BIND_AUTO_CREATE);
             context.startService(musicIntent);
@@ -85,7 +84,7 @@ public class rowSongAdapater extends RecyclerView.Adapter<rowSongAdapater.ViewHo
 
     @Override
     public int getItemCount() {
-        return mSongArrayList.size();
+        return 4;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
