@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.truongkhanh.ofmusicapp.Adapter.rowSongAdapater;
-import com.example.truongkhanh.ofmusicapp.AllOfflineSongActivity;
+import com.example.truongkhanh.ofmusicapp.Activity.AllOfflineSongActivity;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
 
@@ -64,7 +63,6 @@ public class ListSongFragment extends Fragment {
         if(mp3Folder.exists()){
             //textView_More_Song.setText("root"+"/Zing MP3");
             List<File> mp3File = getMp3File(mp3Folder);
-            int count=0;
             for (File file : mp3File){
                 MediaMetadataRetriever mmr = new MediaMetadataRetriever();
                 mmr.setDataSource(file.getAbsolutePath());
@@ -96,6 +94,8 @@ public class ListSongFragment extends Fragment {
                 song.setNameAuthor(nameAuthor);
 
                 song.setPathSong(file.getPath());
+
+                song.setLinkImageSong("");
 
                 // Add song to arrayListSong with data in it
                 // We need more song in AllOfflineSong Activity

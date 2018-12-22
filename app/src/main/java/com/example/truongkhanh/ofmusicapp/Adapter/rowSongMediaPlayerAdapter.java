@@ -44,7 +44,7 @@ public class rowSongMediaPlayerAdapter extends RecyclerView.Adapter<rowSongMedia
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.row_song_for_media, viewGroup, false);
 
-        if(musicIntent==null){
+        if(!musicBound){
             musicIntent = new Intent(context, MusicService.class);
             context.bindService(musicIntent,MusicConnection,context.BIND_AUTO_CREATE);
         }

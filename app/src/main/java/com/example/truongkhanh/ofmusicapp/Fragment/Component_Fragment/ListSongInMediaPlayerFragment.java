@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.truongkhanh.ofmusicapp.Adapter.rowSongMediaPlayerAdapter;
-import com.example.truongkhanh.ofmusicapp.MediaPlayerActivity;
+import com.example.truongkhanh.ofmusicapp.Activity.MediaPlayerActivity;
 import com.example.truongkhanh.ofmusicapp.R;
 
 /**

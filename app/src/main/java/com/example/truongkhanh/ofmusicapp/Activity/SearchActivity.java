@@ -1,7 +1,9 @@
-package com.example.truongkhanh.ofmusicapp;
+package com.example.truongkhanh.ofmusicapp.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.truongkhanh.ofmusicapp.R;
 
 public class SearchActivity extends AppCompatActivity {
 

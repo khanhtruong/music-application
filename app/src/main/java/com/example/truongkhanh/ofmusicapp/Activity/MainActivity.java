@@ -1,6 +1,7 @@
-package com.example.truongkhanh.ofmusicapp;
+package com.example.truongkhanh.ofmusicapp.Activity;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.truongkhanh.ofmusicapp.Adapter.TabLayoutMainPageAdapter;
+import com.example.truongkhanh.ofmusicapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     TabLayout tabLayout;
     public static boolean musicBound = false;
+    public static FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Mapping();
         InitPagerAdaptor();
+
+        floatingActionButton.hide();
     }
 
     private void InitPagerAdaptor() {
@@ -40,11 +45,18 @@ public class MainActivity extends AppCompatActivity {
     private void Mapping() {
         viewPager = (ViewPager) findViewById(R.id.ViewPager_MainActivity);
         tabLayout = (TabLayout) findViewById(R.id.TabLayout_MainActivity);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.FloatingActionButtonComeBackToMediaPlayer);
     }
 
 
     public void onClickSearchBar(View view) {
         Intent intent = new Intent(view.getContext(), SearchActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickTextView(View view) {
+        Intent intent = new Intent(this, MediaPlayerActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 }

@@ -14,13 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.truongkhanh.ofmusicapp.MediaPlayerActivity;
+import com.example.truongkhanh.ofmusicapp.Activity.MediaPlayerActivity;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
 import com.example.truongkhanh.ofmusicapp.Service.MusicService;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 
 public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHolder> {
@@ -81,7 +80,10 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Call Intent and pop to new Activity MediaPlayerActivity
+                    //Create MusicPlayer Service
+                    musicService.getData(songArrayList);
+
+                    // Call Intent and start MediaPlayerActivity
                     int Position = getPosition();
                     if(musicService.getmRandom()) {
                         musicService.setmRandom(false);
@@ -95,8 +97,8 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
 
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MediaPlayerActivity.class);
-                    intent.putExtra("PlaySong", songArrayList);
-                    intent.putExtra("SongPosition", Position);
+                    intent.putExtra("TopSong", songArrayList);
+                    intent.putExtra("OnlineSong", true);
                     v.getContext().startActivity(intent);
                 }
             });

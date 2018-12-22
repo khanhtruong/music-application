@@ -9,7 +9,7 @@
     tools:context=".Activity.AllOfflineSongActivity"
     android:background="@color/black">
     <Toolbar
-        android:id="@+id/Toolbar_All_Song_Activity"
+        android:id="@+id/Toolbar_All_Top_Song_Activity"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="@string/list_all_song"
+        android:text="@string/list_all_top_song"
         android:layout_marginTop="10sp"
         android:layout_marginBottom="15dp"
         android:textSize="20dp"
@@ -27,7 +27,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/RecyclerView_all_song"
+        android:id="@+id/RecyclerView_all_top_song"
         android:background="@color/black"/>
 
 </LinearLayout>

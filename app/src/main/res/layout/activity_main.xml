@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -29,11 +29,23 @@
         android:id="@+id/ViewPager_MainActivity">
 
     </android.support.v4.view.ViewPager>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/TabLayout_MainActivity"
+        android:id="@+id/FloatingActionButtonComeBackToMediaPlayer"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_baseline_play_circle_outline_24px"
+        android:onClick="onClickTextView"
+        android:background="#a4a2a2"
+        android:text="Back To Song Player"
+        android:layout_above="@+id/TabLayout_MainActivity"/>
     
     <android.support.design.widget.TabLayout
         android:id="@+id/TabLayout_MainActivity"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         app:tabMode="fixed"
         app:tabTextColor="#a4a2a2"

@@ -1,9 +1,10 @@
-package com.example.truongkhanh.ofmusicapp;
+package com.example.truongkhanh.ofmusicapp.Activity;
 
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.view.ViewPager;
@@ -18,7 +19,9 @@ import android.widget.Toolbar;
 
 import com.example.truongkhanh.ofmusicapp.Adapter.multiFragmentViewPagerAdapter;
 import com.example.truongkhanh.ofmusicapp.Fragment.Component_Fragment.ListSongInMediaPlayerFragment;
+import com.example.truongkhanh.ofmusicapp.Fragment.Component_Fragment.MyDialogFragment;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
+import com.example.truongkhanh.ofmusicapp.R;
 import com.example.truongkhanh.ofmusicapp.Service.MusicService;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     public static final Handler mSeekbarUpdateHandler = new Handler();
     final Handler mWaitServiceReadyHandler = new Handler();
     public static Runnable mUpdateSeekbar;
-    //static boolean mFlag = true;
+    private boolean OnlineSong;
     Runnable mWaitServiceReady;
 
     private Intent musicIntent;
@@ -53,6 +56,8 @@ public class MediaPlayerActivity extends AppCompatActivity {
         Mapping();
         GetData();
         AddNavBar();
+
+        MainActivity.floatingActionButton.show();
     }
 
     @Override
@@ -78,6 +83,21 @@ public class MediaPlayerActivity extends AppCompatActivity {
             musicIntent = new Intent(this, MusicService.class);
             bindService(musicIntent, MusicConnection, BIND_AUTO_CREATE);
         }
+    }
+
+    // On Destroy Activity
+    @Override
+    public void onDestroy(){
+        // onDestroy we unbind Music Service and remove Runnable mUpdateSeekbar
+        super.onDestroy();
+        unbindService(MusicConnection);
+        mSeekbarUpdateHandler.removeCallbacks(mUpdateSeekbar);
+    }
+
+    // Avoid Destroy Activity
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     private void TimeSong() {
@@ -124,14 +144,6 @@ public class MediaPlayerActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onDestroy(){
-        // onDestroy we unbind Music Service and remove Runnable mUpdateSeekbar
-        super.onDestroy();
-        unbindService(MusicConnection);
-        mSeekbarUpdateHandler.removeCallbacks(mUpdateSeekbar);
-    }
-
     // Thêm Navigation Bar vào activity
     private void AddNavBar() {
         setActionBar(toolbarMediaPlayer);
@@ -165,6 +177,10 @@ public class MediaPlayerActivity extends AppCompatActivity {
         listSongInMediaPlayerFragment = new ListSongInMediaPlayerFragment();
         multiFragmentViewPagerAdapter.AddFragment(listSongInMediaPlayerFragment);
         viewPager.setAdapter(multiFragmentViewPagerAdapter);
+
+        // Change Theme SeekBar
+        seekBar.getProgressDrawable().setColorFilter(
+                getResources().getColor(R.color.MainColor), PorterDuff.Mode.MULTIPLY);
     }
 
     // Lấy dữ liệu truyền vào activity, sử dụng intent
@@ -176,15 +192,18 @@ public class MediaPlayerActivity extends AppCompatActivity {
         if(intent.hasExtra("SongPosition")){
             songPosition = intent.getIntExtra("SongPosition", 0);
         }
+        if(intent.hasExtra("TopSong")){
+            songArrayList = intent.getParcelableArrayListExtra("TopSong");
+        }
+        if(intent.hasExtra("OnlineSong")){
+            OnlineSong = intent.getBooleanExtra("OnlineSong", false);
+        }
     }
 
     public void UpdateUI() {
         songPosition = musicService.getSongPosition();
         Song song = songArrayList.get(songPosition);
         String nameSong = song.getNameSong();
-        if (nameSong == ""){
-            nameSong = "Unknown";
-        }
         getActionBar().setTitle(nameSong);
     }
 
@@ -238,7 +257,14 @@ public class MediaPlayerActivity extends AppCompatActivity {
     }
 
     public void onClickMoreOption(View view) {
-        Toast.makeText(this,"Im your father", Toast.LENGTH_SHORT).show();
+        if(OnlineSong) {
+            Song song= songArrayList.get(songPosition);
+            MyDialogFragment myDialogFragment = new MyDialogFragment();
+            myDialogFragment.show(getFragmentManager(), "");
+            myDialogFragment.setAttribute(song.getPathSong(), song.getNameSong()+".mp3");
+        } else {
+            Toast.makeText(this, "You already have this song !!",Toast.LENGTH_LONG).show();
+        }
     }
 
     public ServiceConnection MusicConnection = new ServiceConnection() {
@@ -248,7 +274,10 @@ public class MediaPlayerActivity extends AppCompatActivity {
             // Get service
             musicService = binder.getService();
             // Send Data
-            musicService.getData(songArrayList);
+            if(musicService.isSongsEmty()){
+                musicService.clearSongs();
+                musicService.getData(songArrayList);
+            }
             musicBound = true;
         }
 

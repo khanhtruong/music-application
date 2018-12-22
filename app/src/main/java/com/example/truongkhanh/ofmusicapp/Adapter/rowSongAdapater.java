@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.truongkhanh.ofmusicapp.MediaPlayerActivity;
+import com.example.truongkhanh.ofmusicapp.Activity.MediaPlayerActivity;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
 import com.example.truongkhanh.ofmusicapp.Service.MusicService;
@@ -103,6 +103,9 @@ public class rowSongAdapater extends RecyclerView.Adapter<rowSongAdapater.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // Create MucsicPlayer Services
+                    musicService.getData(mSongArrayList);
+
                     // Call Intent and pop to new Activity MediaPlayerActivity
                     int Position = getPosition();
                     if(musicService.getmRandom()) {
@@ -119,6 +122,7 @@ public class rowSongAdapater extends RecyclerView.Adapter<rowSongAdapater.ViewHo
                     Intent intent = new Intent(context, MediaPlayerActivity.class);
                     intent.putExtra("PlaySong", mSongArrayList);
                     intent.putExtra("SongPosition", Position);
+                    intent.putExtra("OnlineSong", false);
                     v.getContext().startActivity(intent);
                 }
             });

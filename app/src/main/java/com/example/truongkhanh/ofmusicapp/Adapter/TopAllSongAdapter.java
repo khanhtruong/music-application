@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.truongkhanh.ofmusicapp.Activity.MediaPlayerActivity;
 import com.example.truongkhanh.ofmusicapp.Model.Song;
 import com.example.truongkhanh.ofmusicapp.R;
@@ -26,21 +27,20 @@ import com.example.truongkhanh.ofmusicapp.Service.MusicService;
 import java.io.File;
 import java.util.ArrayList;
 
-public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHolder> {
-
+public class TopAllSongAdapter extends RecyclerView.Adapter<TopAllSongAdapter.ViewHolder> {
     ArrayList<Song> arrayListSong;
     private Context context;
     private Intent musicIntent;
     public MusicService musicService;
     private boolean musicBound = false;
 
-    public AllSongAdapter(ArrayList<Song> songs){
+    public TopAllSongAdapter(ArrayList<Song> songs){
         this.arrayListSong = songs;
     }
 
     @NonNull
     @Override
-    public AllSongAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public TopAllSongAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         context = viewGroup.getContext();
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.row_song,viewGroup,false);
@@ -52,31 +52,18 @@ public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHold
         }
 
         // Return ViewHolder from view create above
-        return new AllSongAdapter.ViewHolder(view);
+        return new TopAllSongAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllSongAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull TopAllSongAdapter.ViewHolder viewHolder, int i) {
         Song song = arrayListSong.get(i);
         viewHolder.nameSong.setText(song.getNameSong());
         viewHolder.nameArtis.setText(song.getNameArtis());
         viewHolder.nameAuthor.setText(song.getNameAuthor());
 
         // Get Image from File MP3
-        File file = new File(song.getPathSong());
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(file.getAbsolutePath());
-        byte[] imageByte = mmr.getEmbeddedPicture();
-        Bitmap imageSong;
-        if(imageByte!=null) {
-            imageSong = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
-            viewHolder.imageViewSong.setImageBitmap(imageSong);
-        } else {
-            // If imagebyte is NULL we get default icon for imageSong
-            Drawable drawable = context.getResources().getDrawable(R.drawable.default_icon_wedidit);
-            imageSong = ((BitmapDrawable)drawable).getBitmap();
-            viewHolder.imageViewSong.setImageBitmap(imageSong);
-        }
+        Glide.with(context).load(song.getLinkImageSong()).into(viewHolder.imageViewSong);
     }
 
     @Override
@@ -119,7 +106,7 @@ public class AllSongAdapter extends RecyclerView.Adapter<AllSongAdapter.ViewHold
                     Intent intent = new Intent(context, MediaPlayerActivity.class);
                     intent.putExtra("PlaySong", arrayListSong);
                     intent.putExtra("SongPosition", Position);
-                    intent.putExtra("OnlineSong", false);
+                    intent.putExtra("OnlineSong", true);
                     v.getContext().startActivity(intent);
                 }
             });

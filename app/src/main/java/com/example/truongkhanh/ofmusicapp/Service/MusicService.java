@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.example.truongkhanh.ofmusicapp.MediaPlayerActivity.btnStart;
-import static com.example.truongkhanh.ofmusicapp.MediaPlayerActivity.mSeekbarUpdateHandler;
-import static com.example.truongkhanh.ofmusicapp.MediaPlayerActivity.mUpdateSeekbar;
+import static com.example.truongkhanh.ofmusicapp.Activity.MediaPlayerActivity.btnStart;
+import static com.example.truongkhanh.ofmusicapp.Activity.MediaPlayerActivity.mSeekbarUpdateHandler;
+import static com.example.truongkhanh.ofmusicapp.Activity.MediaPlayerActivity.mUpdateSeekbar;
 
 public class MusicService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener{
 
@@ -180,6 +180,19 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public void setmRepeat(boolean repeat){
         this.mRepeat = repeat;
+    }
+
+    // Get Boolean when SongArrayList Have Song in it
+    public boolean isSongsEmty(){
+        if(songs.isEmpty()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void clearSongs(){
+        songs.clear();
     }
 
     // Phuong thuc de tao Service

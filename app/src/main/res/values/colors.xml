@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="titleBarColor">#2f3336</color>
     <color name="black">#131415</color>
+    <color name="almostblack">#1a1b1d</color>
     <color name="white">#f2f0f0</color>
     <color name="MainColor">#59e3ff</color>
     <color name="Fragment_color">#393838</color>
