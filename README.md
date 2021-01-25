@@ -1,4 +1,4 @@
-# musicAppOfline
+# Music application
 
 Android project wrote by Java language
 
